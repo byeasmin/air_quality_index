@@ -133,12 +133,12 @@ import pandas as pd
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-# Load global AQI dataset
-df = pd.read_csv("AQI and Lat Long of Countries.csv")  # replace with your CSV file name
+
+df = pd.read_csv("AQI and Lat Long of Countries.csv")  
 
 app = FastAPI(title="Global Air Quality Index API")
 
-# Enable CORS for your frontend
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000"],
@@ -153,7 +153,7 @@ def get_air_quality(
     city: str = Query(..., description="City name")
 ):
     try:
-        # Filter dataset by country and city
+        
         row = df[(df["Country"].str.lower() == country.lower()) & 
                  (df["City"].str.lower() == city.lower())]
 
